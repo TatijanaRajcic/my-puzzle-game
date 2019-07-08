@@ -1,77 +1,72 @@
-var canvas = document.getElementById('puzzle');
-var ctx = canvas.getContext('2d');
+function Puzzle () {
+  let fixThis = this;
+  this.canvas = document.getElementById('puzzle');
+  this.ctx = this.canvas.getContext('2d');
+  this.img = new Image();
+  this.pieces = [];
 
-var img = new Image();
-img.src = 'collage1.jpg'; 
+  this.setUpImg = function(){
+    this.img.src = 'collage1.jpg';
+    // prompt user input/choice
+    debugger
+  }
 
-img.addEventListener('load', function() {
-  
-  // image dimensions
-  var widthImg = img.width;
-  var heightImg = img.height;
-
-  // canvas dimensions
-  canvas.width = widthImg * 2;
-  canvas.height = heightImg;
+  this.setUpCanvas = function(){
+    this.canvas.width = this.img.width *2;
+    this.canvas.height = this.img.height;
+    debugger
+  }
 
   // drawing the puzzle pieces
-  function createPuzzle(columns,rows) {
+  this.createPuzzle = function(columns,rows){  
 
-    var width = widthImg/columns; //the number of pieces horizontally
-    var height = heightImg/rows; //the number of pieces vertically
-    var puzzle = [];
+    var width = this.canvas.width/columns; //the number of pieces horizontally
+    var height = this.canvas.height/rows; //the number of pieces vertically
 
     for (let i=0; i<columns; i++) {
       for (let j=0; j<rows; j++) {
 
-         let puzzlePiece = { 
-             sprite: {
-                 x: i * width,
-                 y: j * height,
-                 width: width,
-                 height: height
-             },
-             currentPosition: {
-                x: i * width,
-                y: j * height
-             }
-         }
-         
-         puzzle.push(puzzlePiece)
+        let puzzlePiece = { 
+          sprite: {
+              x: i * width,
+              y: j * height,
+              width: width,
+              height: height
+          },
+          currentPosition: {
+              x: i * width,
+              y: j * height
+          }
+        }
+        this.pieces.push(puzzlePiece)
       }
     }
+    console.log(this.pieces);
+    return this.pieces;
+  };
 
-    return puzzle
-  }
-
-  function drawPuzzle(puzzle) {
-
+  this.drawPuzzle = function(puzzle) {
 
     for(let i = 0; i < puzzle.length; i++) {
       
       let op = puzzle[i].sprite
       let cp = puzzle[i].currentPosition
   
-      cp.x = (cp.x * Math.random()) + widthImg
+      cp.x = (cp.x * Math.random()) + this.img.width
       cp.y *= Math.random() 
-      ctx.drawImage(img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
+      this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
     }
-  
+
+  };
+
+  this.launchPuzzle = function() {
+    this.setUpImg();
+    this.img.addEventListener("load", function(){
+      fixThis.setUpCanvas();
+      fixThis.drawPuzzle(fixThis.createPuzzle(2,3));
+    });
   }
+}
 
-  let puzzle = createPuzzle(5,7);
-  drawPuzzle(puzzle)
-
-  document.addEventListener("click", function(event){
-     debugger 
-    puzzle.forEach(puzzle)
-  })
-  debugger
-
-
-
-
-
-}, false);
-
-
+var myPuzzle = new Puzzle(); 
+myPuzzle.launchPuzzle();
