@@ -1,72 +1,63 @@
-function Puzzle () {
-  let fixThis = this;
-  this.canvas = document.getElementById('puzzle');
-  this.ctx = this.canvas.getContext('2d');
-  this.img = new Image();
-  this.pieces = [];
-
-  this.setUpImg = function(){
-    this.img.src = 'collage1.jpg';
-    // prompt user input/choice
-    debugger
-  }
-
-  this.setUpCanvas = function(){
-    this.canvas.width = this.img.width *2;
-    this.canvas.height = this.img.height;
-    debugger
-  }
-
-  // drawing the puzzle pieces
-  this.createPuzzle = function(columns,rows){  
-
-    var width = this.canvas.width/columns; //the number of pieces horizontally
-    var height = this.canvas.height/rows; //the number of pieces vertically
-
-    for (let i=0; i<columns; i++) {
-      for (let j=0; j<rows; j++) {
-
-        let puzzlePiece = { 
-          sprite: {
-              x: i * width,
-              y: j * height,
-              width: width,
-              height: height
-          },
-          currentPosition: {
-              x: i * width,
-              y: j * height
-          }
-        }
-        this.pieces.push(puzzlePiece)
-      }
-    }
-    console.log(this.pieces);
-    return this.pieces;
-  };
-
-  this.drawPuzzle = function(puzzle) {
-
-    for(let i = 0; i < puzzle.length; i++) {
-      
-      let op = puzzle[i].sprite
-      let cp = puzzle[i].currentPosition
-  
-      cp.x = (cp.x * Math.random()) + this.img.width
-      cp.y *= Math.random() 
-      this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
-    }
-
-  };
-
-  this.launchPuzzle = function() {
-    this.setUpImg();
-    this.img.addEventListener("load", function(){
-      fixThis.setUpCanvas();
-      fixThis.drawPuzzle(fixThis.createPuzzle(2,3));
-    });
-  }
-}
-
 var myPuzzle = new Puzzle(); 
 myPuzzle.launchPuzzle();
+
+$( "#puzzle" ).on( "click", function(e) {
+  var clickX = e.pageX;
+  var clickY = e.pageY;
+  var clicksOnPuzzlePieces = [];
+  var pieceSelected;
+
+  myPuzzle.clicks +=1;
+
+
+  for (let i=0; i<myPuzzle.pieces.length;i++) {
+    if (myPuzzle.pieces[i].currentPosition.x < clickX 
+      && clickX < myPuzzle.pieces[i].currentPosition.x + myPuzzle.pieces[i].sprite.width
+      && myPuzzle.pieces[i].currentPosition.y < clickY 
+      && clickY < myPuzzle.pieces[i].currentPosition.y + myPuzzle.pieces[i].sprite.height) {
+      // that means that the user selected one piece of puzzle
+      console.log("!!!!!!!! THIS PIECE WAS SELECTED !!!!!!!!!!!!!")
+      clicksOnPuzzlePieces.push(myPuzzle.pieces[i].sprite.position);
+    } else {
+      console.log("THIS PIECE WAS NOT SELECTED")
+    }
+  }
+
+  console.log("total clicks "+myPuzzle.clicks)
+  console.log(clicksOnPuzzlePieces)
+
+  if (myPuzzle.clicks.length % 2 === 0) {
+    if (myPuzzle.pieces[i].sprite.x < clickX 
+      && clickX < myPuzzle.pieces[i].sprite.x + myPuzzle.pieces[i].sprite.width
+      && myPuzzle.pieces[i].sprite.y < clickY 
+      && clickY < myPuzzle.pieces[i].sprite.y + myPuzzle.pieces[i].sprite.height) {
+      // that means that the user selected one piece of puzzle
+      console.log("piece well placed");
+    } else {
+      console.log("piece not well placed")
+    } 
+
+  } else {
+    console.log("don't do nothing");
+  }
+});
+
+
+
+$('#draggable').draggable(); 
+
+/* $( "body" ).on( "drag", function(e,ui) {
+  var dragX = e.pageX;
+  var dragY = e.pageY;
+  console.log("X: "+dragX+" Y: "+dragY);
+  function moveImg() {
+    myPuzzle.ctx.clearRect(dragX,dragY,150,150); 
+    myPuzzle.ctx.drawImage(myPuzzle.img, 0, 0, 150, 150, dragX, dragY, 150, 150);
+  };
+  moveImg();
+}); */
+
+/* TO READ: http://www.java2s.com/Tutorials/Javascript/Canvas_How_to/Image/Move_image_with_keyboard_arrow_key.htm */
+
+/* give some DIV the same coordinates as the puzzle pieces (like a background), give them a draggable class, and create divs for the grid, as droppable,
+and compare their coordinates, to see if they matches. utiliser l'aimant pr faciliter la chose */
