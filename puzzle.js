@@ -7,7 +7,7 @@ function Puzzle () {
   this.clicks = 0;
 
   this.setUpImg = function(){
-    this.img.src = 'collage4.jpg';
+    this.img.src = 'collage1.jpg';
     // prompt user input/choice
   }
 
@@ -105,7 +105,7 @@ function Puzzle () {
     this.setUpImg();
     this.img.addEventListener("load", function(){
       fixThis.setUpCanvas();
-      fixThis.drawPuzzle(fixThis.createPuzzle(2,2),2,2); 
+      fixThis.drawPuzzle(fixThis.createPuzzle(3,3),3,3); 
     });
     this.movePiece();
   }
