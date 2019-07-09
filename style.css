@@ -1,8 +1,21 @@
-canvas {
-  border: 1px solid red;
+body {
+  background: black;
+  color: white;
 }
 
 .canvas-container {
   display:flex;
   justify-content: center;
+}
+
+canvas{
+  border: 1px solid red
+}
+
+/* #puzzle{
+  width:50%;
+} */
+
+.invisible{
+  display:none;
 }

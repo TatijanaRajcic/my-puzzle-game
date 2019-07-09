@@ -5,14 +5,18 @@ function Puzzle () {
   this.img = new Image();
   this.pieces = [];
   this.clicks = 0;
+  this.clickedPieces = [];
+  this.foundPieces = 0;
+
+  // AJOUTER UN CHRONO
 
   this.setUpImg = function(){
-    this.img.src = 'collage1.jpg';
+    this.img.src = 'collage4.jpg';
     // prompt user input/choice
   }
 
   this.setUpCanvas = function(){
-    this.canvas.width = this.img.width *2;
+    this.canvas.width = this.img.width*2;
     this.canvas.height = this.img.height;
   }
 
@@ -46,36 +50,33 @@ function Puzzle () {
     return this.pieces;
   };
 
+  this.shuffle = function(array) {
+    var m = array.length, t, i;
+    
+    // While there remain elements to shuffle…
+    while (m) {
+  
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+  
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+  
+    return array;
+  }
+
   this.drawPuzzle = function(puzzle,columns,rows) {
 
     var normalArrayOfIndexes = [];
-
     for (let j=0; j<rows; j++) {
       for (let i=0; i<columns; i++) {
         normalArrayOfIndexes.push([i,j]);
       }
     } 
-
-    function shuffle(array) {
-      var m = array.length, t, i;
-    
-      // While there remain elements to shuffle…
-      while (m) {
-    
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-    
-        // And swap it with the current element.
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-      }
-    
-      console.log(normalArrayOfIndexes)
-      return array;
-    }
-
-    shuffle(normalArrayOfIndexes);
+    this.shuffle(normalArrayOfIndexes);
 
     for(let i = 0; i < puzzle.length; i++) {
       
@@ -83,32 +84,37 @@ function Puzzle () {
       let cp = puzzle[i].currentPosition
       let newCoordinates = normalArrayOfIndexes[i];
 
-      cp.x = this.img.width + op.width*newCoordinates[0];
+      cp.x = this.img.width + op.width*newCoordinates[0]; 
+      // problem with lin 11 in main.js when I set style.css
+
       cp.y = op.height*newCoordinates[1];
 
       this.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
       this.ctx.fillRect(op.x, op.y, op.width, op.height)
       this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
-
     }
   };
 
-  this.movePiece = function() {
-    let clicksCoordinates = [];
-    $(document).on("click", function(e){
-      var x = e.clientX;
-      var y = e.clientY;
-      clicksCoordinates.push({mousex: x, mousey:y})
-    })
-
-  }
-
-  this.launchPuzzle = function() {
+  this.launchPuzzle = function(columns,rows) {
     this.setUpImg();
     this.img.addEventListener("load", function(){
       fixThis.setUpCanvas();
-      fixThis.drawPuzzle(fixThis.createPuzzle(3,3),3,3); 
+      fixThis.drawPuzzle(fixThis.createPuzzle(columns,rows),columns,rows); 
     });
-    this.movePiece();
   }
+
+  this.launchDefaultPuzzle = function(){
+    this.launchPuzzle(3,3);
+  }
+
+  this.launchNewPuzzle = function(difficilty) {
+    this.launchPuzzle(difficilty,difficilty)
+  }
+
+  this.finishPuzzle = function() {
+    alert("finished");
+  }
+
 }
+
+
