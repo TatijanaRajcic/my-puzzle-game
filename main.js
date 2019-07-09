@@ -1,63 +1,50 @@
 var myPuzzle = new Puzzle(); 
 myPuzzle.launchPuzzle();
+var clickedPieces = [];
 
 $( "#puzzle" ).on( "click", function(e) {
   var clickX = e.pageX;
   var clickY = e.pageY;
-  var clicksOnPuzzlePieces = [];
-  var pieceSelected;
 
   myPuzzle.clicks +=1;
 
-
   for (let i=0; i<myPuzzle.pieces.length;i++) {
-    if (myPuzzle.pieces[i].currentPosition.x < clickX 
-      && clickX < myPuzzle.pieces[i].currentPosition.x + myPuzzle.pieces[i].sprite.width
-      && myPuzzle.pieces[i].currentPosition.y < clickY 
-      && clickY < myPuzzle.pieces[i].currentPosition.y + myPuzzle.pieces[i].sprite.height) {
-      // that means that the user selected one piece of puzzle
-      console.log("!!!!!!!! THIS PIECE WAS SELECTED !!!!!!!!!!!!!")
-      clicksOnPuzzlePieces.push(myPuzzle.pieces[i].sprite.position);
-    } else {
-      console.log("THIS PIECE WAS NOT SELECTED")
-    }
+
+    var originalP = myPuzzle.pieces[i].sprite;
+    var currentP = myPuzzle.pieces[i].currentPosition;
+
+    // if the user's first click selects a piece
+    if (currentP.x < clickX && clickX < currentP.x + originalP.width
+      && currentP.y < clickY && clickY < currentP.y + originalP.height) {
+        console.log("the selected sprite :"+ originalP.position)
+        // we store the reference of the selected puzzle piece
+        clickedPieces.push(originalP.position);
+    } 
   }
+  console.log(clickedPieces)
 
-  console.log("total clicks "+myPuzzle.clicks)
-  console.log(clicksOnPuzzlePieces)
+  // the user should first click on a puzzle piece and then to an empty space on the canvas
+  // therefore, we should compare the coordinates of the selected piece puzzle and the selected space at every 2 clicks
+  if (myPuzzle.clicks % 2 === 0) {
+    
+    // first, we retrieve the position of the last clicked piece of puzzle
+    var indexClickedPiece = clickedPieces[clickedPieces.length - 1] - 1;
 
-  if (myPuzzle.clicks.length % 2 === 0) {
-    if (myPuzzle.pieces[i].sprite.x < clickX 
-      && clickX < myPuzzle.pieces[i].sprite.x + myPuzzle.pieces[i].sprite.width
-      && myPuzzle.pieces[i].sprite.y < clickY 
-      && clickY < myPuzzle.pieces[i].sprite.y + myPuzzle.pieces[i].sprite.height) {
-      // that means that the user selected one piece of puzzle
+    // that will be our current Puzzle Piece. We are going to compare its original position to where the user just clicked on the canvas
+    var currentPiece = myPuzzle.pieces[indexClickedPiece];
+
+    // if the user positionned its puzzle piece where it should be
+    if (currentPiece.sprite.x < clickX && clickX < currentPiece.sprite.x + currentPiece.sprite.width
+      && currentPiece.sprite.y < clickY && clickY < currentPiece.sprite.y + currentPiece.sprite.height) {
       console.log("piece well placed");
+      myPuzzle.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      myPuzzle.ctx.fillRect(currentPiece.currentPosition.x, currentPiece.currentPosition.y, currentPiece.sprite.width, currentPiece.sprite.height)
+      myPuzzle.ctx.drawImage(myPuzzle.img, currentPiece.sprite.x, currentPiece.sprite.y, currentPiece.sprite.width, currentPiece.sprite.height,currentPiece.sprite.x, currentPiece.sprite.y, currentPiece.sprite.width, currentPiece.sprite.height)
     } else {
+      // if the user did not position its puzzle piece at the right place
       console.log("piece not well placed")
     } 
-
   } else {
-    console.log("don't do nothing");
+    console.log("not comparing")
   }
 });
-
-
-
-$('#draggable').draggable(); 
-
-/* $( "body" ).on( "drag", function(e,ui) {
-  var dragX = e.pageX;
-  var dragY = e.pageY;
-  console.log("X: "+dragX+" Y: "+dragY);
-  function moveImg() {
-    myPuzzle.ctx.clearRect(dragX,dragY,150,150); 
-    myPuzzle.ctx.drawImage(myPuzzle.img, 0, 0, 150, 150, dragX, dragY, 150, 150);
-  };
-  moveImg();
-}); */
-
-/* TO READ: http://www.java2s.com/Tutorials/Javascript/Canvas_How_to/Image/Move_image_with_keyboard_arrow_key.htm */
-
-/* give some DIV the same coordinates as the puzzle pieces (like a background), give them a draggable class, and create divs for the grid, as droppable,
-and compare their coordinates, to see if they matches. utiliser l'aimant pr faciliter la chose */
