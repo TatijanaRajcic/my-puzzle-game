@@ -86,6 +86,8 @@ function Puzzle () {
       cp.x = this.img.width + op.width*newCoordinates[0];
       cp.y = op.height*newCoordinates[1];
 
+      this.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      this.ctx.fillRect(op.x, op.y, op.width, op.height)
       this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
 
     }
