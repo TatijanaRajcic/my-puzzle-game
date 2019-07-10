@@ -96,7 +96,6 @@ function Puzzle () {
     this.setUpImg();
     this.img.addEventListener("load", function(){
       fixThis.setUpCanvas();
-      fixThis.counter();
       fixThis.drawPuzzle(fixThis.createPuzzle(columns,rows),columns,rows); 
     });
   }
