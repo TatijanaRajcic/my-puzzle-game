@@ -1,16 +1,8 @@
 function Puzzle () {
-  let fixThis = this;
   this.canvas = document.getElementById('puzzle');
   this.ctx = this.canvas.getContext('2d');
   this.img = new Image();
   this.pieces = [];
-  this.clicks = 0;
-  this.clickedPieces = [];
-  this.foundPieces = 0;
-  this.time = 1;
-  this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
-
-  // AJOUTER UN CHRONO
   
   this.setUpImg = function(){
     let randomNum = Math.floor(Math.random() * 6) + 1 ;
@@ -26,6 +18,7 @@ function Puzzle () {
   // drawing the puzzle pieces
   this.createPuzzle = function(columns,rows){  
 
+    this.pieces = [];
     var width = (this.canvas.width/2)/columns; //the number of pieces horizontally / we divide by 2 so that we have the right number of pieces horizontally
     var height = this.canvas.height/rows; //the number of pieces vertically
     var count = 0;
@@ -90,29 +83,8 @@ function Puzzle () {
       this.ctx.fillRect(op.x, op.y, op.width, op.height)
       this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
     }
+
   };
-
-  this.launchPuzzle = function(columns,rows) {
-    this.setUpImg();
-    this.img.addEventListener("load", function(){
-      fixThis.setUpCanvas();
-      fixThis.drawPuzzle(fixThis.createPuzzle(columns,rows),columns,rows); 
-    });
-  }
-
-  this.launchDefaultPuzzle = function(){
-    this.launchPuzzle(3,3);
-  }
-
-  this.launchNewPuzzle = function(difficulty) {
-    this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
-    this.launchPuzzle(difficulty,difficulty)
-  }
-
-
-  this.finishPuzzle = function() {
-    setTimeout(function(){ console.log("finished"); }, 500);
-  }
 
 }
 
