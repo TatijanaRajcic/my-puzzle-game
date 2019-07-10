@@ -1,0 +1,7 @@
+/* pieces i clicked, number of piecs i have -> game constructor
+ */
+/*  var myPuzzle would not be global anymore
+ */
+/* store score with cookies */
+/* puzzle shape */
+/* singleton prototype so that we only hav one instance of the object */

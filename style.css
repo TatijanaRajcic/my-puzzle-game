@@ -1,21 +1,78 @@
+/* GENERAL */
+
 body {
   background: black;
   color: white;
+  font-family: 'Montserrat', sans-serif;
+/*   font-size: 25px;*/
 }
 
+.invisible, .hidden{
+  display:none;
+}
+
+/* MAIN CONTAINER */
+
+.main-container{
+  display:flex;
+  flex-direction:column;
+}
+
+/* TEXT CONTAINER */
+.text-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.text-container div {
+  width:100%;
+  text-align: center
+}
+
+.title-container{
+  display:flex;
+  justify-content: center
+}
+
+h1 {
+  font-size: 5em;
+  animation: bouncing 3s ease infinite
+}
+
+.message-container{
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.message-container p {
+  width:100%;
+  text-align: center;
+}
+
+/* CANVAS CONTAINER */
 .canvas-container {
   display:flex;
   justify-content: center;
 }
 
-canvas{
-  border: 1px solid red
+/* CLUE CONTAINER */
+
+.clue-img-container{
+  display:flex;
+  justify-content:center;
 }
 
-/* #puzzle{
-  width:50%;
-} */
+/* OTHER */
 
-.invisible{
-  display:none;
+@keyframes bouncing {
+  0% {
+  }
+  
+  50% {
+  }
+
+  100% {
+  }
 }
+

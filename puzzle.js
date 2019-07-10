@@ -7,12 +7,16 @@ function Puzzle () {
   this.clicks = 0;
   this.clickedPieces = [];
   this.foundPieces = 0;
+  this.time = 1;
+  this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
 
   // AJOUTER UN CHRONO
-
+  
   this.setUpImg = function(){
-    this.img.src = 'collage4.jpg';
-    // prompt user input/choice
+    let randomNum = Math.floor(Math.random() * 6) + 1 ;
+    this.img.src = 'collage'+`${randomNum}`+'.jpg';
+    $("#clue-img").attr("src",'collage'+`${randomNum}`+'.jpg');
+    /* this.img.height = "200"; */
   }
 
   this.setUpCanvas = function(){
@@ -95,10 +99,17 @@ function Puzzle () {
     }
   };
 
+  this.counter = function() {
+    setInterval(() => {
+      this.time +=1;
+    }, 1000);
+  }
+
   this.launchPuzzle = function(columns,rows) {
     this.setUpImg();
     this.img.addEventListener("load", function(){
       fixThis.setUpCanvas();
+      fixThis.counter();
       fixThis.drawPuzzle(fixThis.createPuzzle(columns,rows),columns,rows); 
     });
   }
@@ -107,12 +118,14 @@ function Puzzle () {
     this.launchPuzzle(3,3);
   }
 
-  this.launchNewPuzzle = function(difficilty) {
-    this.launchPuzzle(difficilty,difficilty)
+  this.launchNewPuzzle = function(difficulty) {
+    this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
+    this.launchPuzzle(difficulty,difficulty)
   }
 
+
   this.finishPuzzle = function() {
-    alert("finished");
+    setTimeout(function(){ console.log("finished"); }, 500);
   }
 
 }
