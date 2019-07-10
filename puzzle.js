@@ -49,46 +49,41 @@ function Puzzle () {
         this.pieces.push(puzzlePiece)
       }
     }
-    /* console.log(this.pieces); */
     return this.pieces;
   };
 
-  this.shuffle = function(array) {
-    var m = array.length, t, i;
+  this.shufflePuzzle = function(columns,rows) {
+
+    var arrayOfIndexes = [];
+    for (let j=0; j<rows; j++) {
+      for (let i=0; i<columns; i++) {
+        arrayOfIndexes.push([i,j]);
+      }
+    } 
+
+    var m = arrayOfIndexes.length, t, i;
     
-    // While there remain elements to shuffle…
     while (m) {
-  
-      // Pick a remaining element…
       i = Math.floor(Math.random() * m--);
-  
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
+      t = arrayOfIndexes[m];
+      arrayOfIndexes[m] = arrayOfIndexes[i];
+      arrayOfIndexes[i] = t;
     }
   
-    return array;
+    return arrayOfIndexes;
   }
 
   this.drawPuzzle = function(puzzle,columns,rows) {
 
-    var normalArrayOfIndexes = [];
-    for (let j=0; j<rows; j++) {
-      for (let i=0; i<columns; i++) {
-        normalArrayOfIndexes.push([i,j]);
-      }
-    } 
-    this.shuffle(normalArrayOfIndexes);
+    var reshuffledArrayOfIndexes = this.shufflePuzzle(columns,rows);
 
     for(let i = 0; i < puzzle.length; i++) {
       
       let op = puzzle[i].sprite
       let cp = puzzle[i].currentPosition
-      let newCoordinates = normalArrayOfIndexes[i];
+      let newCoordinates = reshuffledArrayOfIndexes[i];
 
       cp.x = this.img.width + op.width*newCoordinates[0]; 
-
       cp.y = op.height*newCoordinates[1];
 
       this.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
@@ -96,12 +91,6 @@ function Puzzle () {
       this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
     }
   };
-
-  this.counter = function() {
-    setInterval(() => {
-      this.time +=1;
-    }, 1000);
-  }
 
   this.launchPuzzle = function(columns,rows) {
     this.setUpImg();
