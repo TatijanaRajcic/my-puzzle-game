@@ -2,20 +2,29 @@ function Game () {
   this.puzzle = new Puzzle();
   let myPuzzle = this.puzzle;
   let myGame = this;
+  this.lives = 5;
   this.clicks = 0;
   this.clickedPieces = [];
   this.foundPieces = 0;
+  this.timer = 0;
 
   this.start = function(columns,rows) {
     this.puzzle.setUpImg();
     this.clicks = 0;
     this.clickedPieces = [];
     this.foundPieces = 0;
+    this.setTimer();
     this.puzzle.img.addEventListener("load", function(){
       myPuzzle.setUpCanvas();
       myPuzzle.drawPuzzle(myPuzzle.createPuzzle(columns,rows),columns,rows); 
     });
   };
+
+  this.setTimer = function(){
+    setInterval(() => {
+      this.timer +=1;
+    }, 1000);
+  }
 
   this.restart = function(difficulty) {
     this.puzzle.ctx.clearRect(0,0,this.puzzle.canvas.width,this.puzzle.canvas.height);

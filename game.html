@@ -19,22 +19,31 @@
       </div>
     
       <div class = "user-input-container">
-        <div class="game-information-container">
-          <p>lazy today?</p>
-          <input type="range" id="number-pieces" min="1" max="100" value="50">
-        </div>
-      
-        <div class="clue-container">
-          <p><span id="clue">want a clue?</span> / <span id="other-game">another puzzle?</span></p>
-        </div>
-      
-        <div class="lives-container">
-          <img src="heart.png" alt="">
+
+        <div class="state-game">
+          <div class="lives-container">
+          </div>
+  
+          <div class="games-container">
+            <p>your time: <span id="counter"></span> / puzzles solved: <span id="games">0</span></p>
+          </div>
+  
+          <div class="record-container">
+            <p>current record: 42 puzzles in 360 secs</p>
+          </div>
         </div>
 
-        <div class="games-container">
-          <p>puzzles solved: <span id="games">0</span></p>
+        <div class="performance-container">
+          <div class="game-information-container">
+            <p>lazy today?</p>
+            <p><input type="range" id="number-pieces" min="1" max="100" value="50"></p>
+          </div>
+        
+          <div class="clue-container">
+            <p><span id="clue">want a clue?</span> / <span id="other-game">another puzzle?</span></p>
+          </div>
         </div>
+        
       </div>
           
       <div class="message-container">

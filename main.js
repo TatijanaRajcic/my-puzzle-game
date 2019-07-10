@@ -1,3 +1,5 @@
+// GENERAL QUESTION: DO I NEED A OBJECT CONSTRUCTOR FOR PLAYING?
+
 var myGame = new Game();
 var solvedPuzzles = 0;
 
@@ -20,6 +22,7 @@ $("#number-pieces").on("click", function() {
 // CHOOSE ANOTHER PUZZLE
 
 $("#other-game").on("click", function() {
+  $("#number-pieces").val("50");
   myGame.restart(3);
 })
 
@@ -35,6 +38,22 @@ $("#clue").on("click", function(){
   },1000)
   $("#message-instructions-one").toggleClass("hidden");
 })
+
+// THE LIVES
+
+for (i=0;i<myGame.lives; i++) {
+  $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+}
+// DO SOMETHING WITH IT !!!
+
+// THE TIMER
+
+setInterval(() => {
+  $("#counter").html(myGame.timer);
+});
+
+// INTERVAL NOT WORKING WELL WHEN I RESTART A NEW GAME
+// BUT I STILL WANT TO KEEP A TRACK OF THE TOTAL TIME
 
 // THE PUZZLE
 
@@ -59,7 +78,10 @@ $( "#puzzle" ).on( "click", function(e) {
   }
   
   if (myGame.checkIfFinished() === true){
-    $("#games").html(solvedPuzzles);
+    setTimeout(function(){
+      $("#games").html(solvedPuzzles);
+      $("#number-pieces").val("50");
+    },1000)
   };
 
 });
