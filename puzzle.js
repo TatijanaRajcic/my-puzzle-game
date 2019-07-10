@@ -16,7 +16,6 @@ function Puzzle () {
     let randomNum = Math.floor(Math.random() * 6) + 1 ;
     this.img.src = 'collage'+`${randomNum}`+'.jpg';
     $("#clue-img").attr("src",'collage'+`${randomNum}`+'.jpg');
-    /* this.img.height = "200"; */
   }
 
   this.setUpCanvas = function(){
@@ -89,7 +88,6 @@ function Puzzle () {
       let newCoordinates = normalArrayOfIndexes[i];
 
       cp.x = this.img.width + op.width*newCoordinates[0]; 
-      // problem with lin 11 in main.js when I set style.css
 
       cp.y = op.height*newCoordinates[1];
 

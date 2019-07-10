@@ -13,32 +13,40 @@
   <div class="main-container">
 
     <div class="text-container">
+
       <div class="title-container">
         <h1 id="page-title">puzzle game</h1>
       </div>
     
-      <div class="game-information-container">
-        <p>How hard do you want your puzzle to be?</p>
-        <input type="range" id="number-pieces" min="1" max="100" value="50">
+      <div class = "user-input-container">
+        <div class="game-information-container">
+          <p>lazy today?</p>
+          <input type="range" id="number-pieces" min="1" max="100" value="50">
+        </div>
+      
+        <div class="clue-container">
+          <p><span id="clue">want a clue?</span> / <span id="other-game">another puzzle?</span></p>
+        </div>
+      
+        <div class="lives-container">
+          <img src="heart.png" alt="">
+        </div>
+
+        <div class="games-container">
+          <p>puzzles solved: <span id="games">0</span></p>
+        </div>
       </div>
-    
-      <div class="clue-container">
-        <p id="clue">want a clue?</p>
-      </div>
-    
-      <div class="counter-container">
-        <p id="counter"></p>
-      </div>
-    
+          
       <div class="message-container">
         <p id="message-instructions-one">Choose your puzzle piece!</p>
         <p id="message-instructions-two" class="hidden">Choose its place!</p>
-      </div>
+      </div> 
+
     </div>
       
         <!-- mettre un compte à rebourd au début -->
     
-    <div class="image-container">
+    <div class="creative-container">
       <div class="canvas-container">
         <canvas id="puzzle"></canvas>
       </div>

@@ -21,42 +21,58 @@ body {
 /* TEXT CONTAINER */
 .text-container{
   display:flex;
-  flex-direction: column;
-}
-
-.text-container div {
-  width:100%;
-  text-align: center
-}
-
-.title-container{
-  display:flex;
-  justify-content: center
-}
-
-h1 {
-  font-size: 5em;
-  animation: bouncing 3s ease infinite
-}
-
-.message-container{
-  display:flex;
-  justify-content: center;
   flex-wrap: wrap;
 }
 
-.message-container p {
-  width:100%;
-  text-align: center;
+/* Title container within Text container */
+.title-container{
+  width:50%;
+  position:relative;
 }
 
-/* CANVAS CONTAINER */
+.title-container h1 {
+  font-size: 5em;
+  animation: bouncing 3s ease infinite;
+  position:absolute; 
+  padding-left:20%;
+}
+
+/* User input container within Text container */
+
+.user-input-container{
+  width:50%;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align:end;
+}
+
+.user-input-container div {
+  padding-right:20%;
+}
+
+/* Message container within Text container */
+
+.message-container{
+  width:100%;
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 1%
+}
+
+/* CREATIVE-CONTAINER */
+
+.creative-container{
+  height:25%;
+}
+
+/* Canvas container within Creative container */
 .canvas-container {
   display:flex;
   justify-content: center;
 }
 
-/* CLUE CONTAINER */
+/* Clue container within Creative number */
 
 .clue-img-container{
   display:flex;
@@ -67,12 +83,15 @@ h1 {
 
 @keyframes bouncing {
   0% {
+    margin-top: 100;
   }
   
   50% {
+    margin-top: 0;
   }
 
   100% {
+    margin-top: 100;
   }
 }
 

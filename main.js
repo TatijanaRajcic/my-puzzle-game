@@ -1,11 +1,12 @@
 var myPuzzle = new Puzzle(); 
 myPuzzle.launchDefaultPuzzle();
 
+
 // NUMBER OF PUZZLE PIECES
 
 $("#number-pieces").on("click", function() {
   var difficulty = $(this).val();
-  console.log(difficulty)
+
   if (difficulty > 66) {
     difficulty = 6;
   } else if (difficulty > 33 ) {
@@ -16,23 +17,20 @@ $("#number-pieces").on("click", function() {
 
   myPuzzle = new Puzzle();
   myPuzzle.launchNewPuzzle(difficulty,difficulty)
-  
 })
 
-// THE TIMER
+// CHOOSE ANOTHER PUZZLE
 
-var thePlayerTimer = setInterval(() => {
-  $("#counter").html(myPuzzle.time)
-});
-
+$("#other-game").on("click", function() {
+  myPuzzle = new Puzzle();
+  myPuzzle.launchDefaultPuzzle();
+})
 
 // THE CLUE
 
 $("#clue").on("click", function(){
-  setTimeout(function(){
-    $("#puzzle").toggleClass("invisible");
-    $("#clue-img").toggleClass("invisible");
-  })
+  $("#puzzle").toggleClass("invisible");
+  $("#clue-img").toggleClass("invisible");
   $("#message-instructions-one").toggleClass("hidden");
   setTimeout(function(){
     $("#puzzle").toggleClass("invisible");
@@ -40,6 +38,10 @@ $("#clue").on("click", function(){
   },1000)
   $("#message-instructions-one").toggleClass("hidden");
 })
+
+// TOTAL PUZZLES SOLVED
+var solvedPuzzles = 0;
+$("#games").html(solvedPuzzles);
 
 // THE PUZZLE
 
@@ -111,8 +113,8 @@ $( "#puzzle" ).on( "click", function(e) {
 
   if (myPuzzle.foundPieces === myPuzzle.pieces.length) {
     myPuzzle.finishPuzzle();
-    clearInterval(thePlayerTimer);
-    setTimeout(function(){
+    solvedPuzzles+=1;
+      setTimeout(function(){
       myPuzzle = new Puzzle();
       myPuzzle.launchDefaultPuzzle();
     },1000)
