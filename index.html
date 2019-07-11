@@ -47,8 +47,6 @@
       </div>
     </div>
       
-        <!-- mettre un compte à rebourd au début -->
-
     <div class="message-container">
       <p id="message-instructions-one">Choose your puzzle piece!</p>
       <p id="message-instructions-two" class="invisible">Choose its place!</p>
@@ -71,12 +69,13 @@
 
     <div class="final-message-container invisible">
       <p>the end.</p>
-      <p><button class="new-play">play again.</button></p>
+      <p><button id="new-play-looser">play again.</button></p>
     </div>
 
     <div class="winner-message-container invisible">
       <p>yaaay. you just broke the record with <span id="user-record"></span> puzzles in <span id="user-time"></span> seconds.</p>
-      <p><button class="new-play">play again.</button></p>
+      <p><button id="new-play-winner">play again.</button></p>
+      <img id="winner-img" class="invisible" src="winner.png" alt="">
     </div>
 
   </div>

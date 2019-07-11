@@ -4,6 +4,7 @@ body {
   background: black;
   color: white;
   font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
 }
 
 .invisible {
@@ -41,7 +42,7 @@ body {
   font-size: 5em;
   animation: bouncing 3s ease infinite;
   position:absolute; 
-  padding-left:20%;
+  padding-left:15%;
 }
 
 @keyframes bouncing {
@@ -85,7 +86,7 @@ body {
   display:flex;
   flex-direction: column;
   text-align: end;
-  padding-right:20%;
+  padding-right:15%;
 }
 
 .performance-container div {

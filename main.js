@@ -145,7 +145,7 @@ $("#puzzle").on( "click", function(e) {
 
 // NEW PLAYING
 
-$(".new-play").on("click", function(){
+$("#new-play-looser").on("click", function(){
 
   $(".message-container").toggleClass("invisible");
   $(".creative-container").toggleClass("invisible");
@@ -164,3 +164,19 @@ $(".new-play").on("click", function(){
 });
 
 
+$("#new-play-winner").on("click", function(){
+
+  $(".message-container").toggleClass("invisible");
+  $(".creative-container").toggleClass("invisible");
+  $(".user-input-container").toggleClass("hide");
+  $(".winner-message-container").toggleClass("flex");
+
+  playing.restart();
+
+  for (i=0;i<playing.lives; i++) {
+    $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+  }
+
+  $("#games").html(playing.solvedPuzzles);
+
+});
