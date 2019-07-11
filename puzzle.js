@@ -6,8 +6,8 @@ function Puzzle () {
   
   this.setUpImg = function(){
     let randomNum = Math.floor(Math.random() * 10) + 1 ;
-    this.img.src = 'images/collage'+`${randomNum}`+'.jpg';
-    $("#clue-img").attr("src",'images/collage'+`${randomNum}`+'.jpg');
+    this.img.src = 'images/collage'+`${randomNum}`+'b.jpg';
+    $("#clue-img").attr("src",'images/collage'+`${randomNum}`+'b.jpg');
   }
 
   this.setUpCanvas = function(){
