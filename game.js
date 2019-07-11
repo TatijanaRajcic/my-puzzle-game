@@ -6,29 +6,24 @@ function Game () {
   this.clicks = 0;
   this.clickedPieces = [];
   this.foundPieces = 0;
-  this.timer = 0;
 
   this.start = function(columns,rows) {
     this.puzzle.setUpImg();
     this.clicks = 0;
     this.clickedPieces = [];
     this.foundPieces = 0;
-    this.setTimer();
-    this.puzzle.img.addEventListener("load", function(){
+      this.puzzle.img.addEventListener("load", function(){
       myPuzzle.setUpCanvas();
       myPuzzle.drawPuzzle(myPuzzle.createPuzzle(columns,rows),columns,rows); 
     });
   };
 
-  this.setTimer = function(){
-    setInterval(() => {
-      this.timer +=1;
-    }, 1000);
-  }
-
   this.restart = function(difficulty) {
     this.puzzle.ctx.clearRect(0,0,this.puzzle.canvas.width,this.puzzle.canvas.height);
     this.start(difficulty,difficulty);
+    if (difficulty === 1) {
+      return "lazy";
+    }
   }
 
   this.checkClickPuzzle = function(mouseX,mouseY) {
@@ -70,8 +65,7 @@ function Game () {
 
   this.checkIfFinished = function(){
     if (this.foundPieces === this.puzzle.pieces.length) {
-      solvedPuzzles+=1;
-      setTimeout(function(){
+        setTimeout(function(){
         myGame.restart(3);
       },1000)
     return true

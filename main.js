@@ -1,29 +1,49 @@
-// GENERAL QUESTION: DO I NEED A OBJECT CONSTRUCTOR FOR PLAYING?
-
-var myGame = new Game();
-var solvedPuzzles = 0;
+var playing = new Playing()
 
 // NUMBER OF PUZZLE PIECES
 
 $("#number-pieces").on("click", function() {
   var difficulty = $(this).val();
 
-  if (difficulty > 66) {
-    difficulty = 6;
+  if (difficulty > 88) {
+    difficulty = 9;
+  } else if (difficulty > 66) {
+    difficulty = 7;
+  } else if (difficulty > 42) {
+    difficulty = 5;
   } else if (difficulty > 33 ) {
     difficulty = 3;
-  } else {
+  } else if (difficulty > 5) {
     difficulty = 2;
+  } else {
+    difficulty = 1;
   }
 
-  myGame.restart(difficulty);
+  var myNewGame = playing.game.restart(difficulty);
+  if (myNewGame === "lazy") {
+    $("#lazy-img").toggleClass("temp");
+    $("#puzzle").toggleClass("invisible");
+    $("#message-cheering").toggleClass("temp");
+    $("#message-instructions-one").toggleClass("temp");
+    $("#message-instructions-two").toggleClass("temp");
+
+    setTimeout(function(){
+      $("#lazy-img").toggleClass("temp");
+      $("#puzzle").toggleClass("invisible");
+      $("#message-cheering").toggleClass("temp");
+      $("#message-instructions-one").toggleClass("temp");
+      $("#message-instructions-two").toggleClass("temp");
+      $("#number-pieces").val("50");
+      playing.game.restart(3);
+    },1500)
+  }
 })
 
 // CHOOSE ANOTHER PUZZLE
 
 $("#other-game").on("click", function() {
   $("#number-pieces").val("50");
-  myGame.restart(3);
+  playing.game.restart(3);
 })
 
 // THE CLUE
@@ -41,7 +61,7 @@ $("#clue").on("click", function(){
 
 // THE LIVES
 
-for (i=0;i<myGame.lives; i++) {
+for (i=0;i<playing.game.lives; i++) {
   $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
 }
 // DO SOMETHING WITH IT !!!
@@ -49,17 +69,14 @@ for (i=0;i<myGame.lives; i++) {
 // THE TIMER
 
 setInterval(() => {
-  $("#counter").html(myGame.timer);
+  $("#counter").html(playing.timer);
 });
-
-// INTERVAL NOT WORKING WELL WHEN I RESTART A NEW GAME
-// BUT I STILL WANT TO KEEP A TRACK OF THE TOTAL TIME
 
 // THE PUZZLE
 
 $( "#puzzle" ).on( "click", function(e) {
 
-  myGame.clicks +=1;
+  playing.game.clicks +=1;
 
   // get the position where we clicked
   var clickX = e.pageX;
@@ -67,19 +84,20 @@ $( "#puzzle" ).on( "click", function(e) {
   clickX -= $(this).offset().left;
   clickY -= $(this).offset().top;
 
-  if (myGame.checkClickPuzzle(clickX,clickY) === true) {
+  if (playing.game.checkClickPuzzle(clickX,clickY) === true) {
     $("#message-instructions-one").toggleClass("hidden");
     $("#message-instructions-two").toggleClass("hidden");
   }
 
-  if (myGame.checkClickCanvas(clickX,clickY) === true){
+  if (playing.game.checkClickCanvas(clickX,clickY) === true){
     $("#message-instructions-one").toggleClass("hidden");
     $("#message-instructions-two").toggleClass("hidden");
   }
   
-  if (myGame.checkIfFinished() === true){
+  if (playing.game.checkIfFinished() === true){
+    playing.solvedPuzzles +=1;
     setTimeout(function(){
-      $("#games").html(solvedPuzzles);
+      $("#games").html(playing.solvedPuzzles);
       $("#number-pieces").val("50");
     },1000)
   };
