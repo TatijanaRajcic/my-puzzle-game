@@ -1,22 +1,22 @@
 var playing = new Playing()
 
-// NUMBER OF PUZZLE PIECES
+// CHOICE OF PUZZLE DIFFICULTY
 
 $("#number-pieces").on("click", function() {
   var difficulty = $(this).val();
 
   if (difficulty > 88) {
-    difficulty = 9;
-  } else if (difficulty > 66) {
-    difficulty = 7;
-  } else if (difficulty > 42) {
-    difficulty = 5;
-  } else if (difficulty > 33 ) {
-    difficulty = 3;
-  } else if (difficulty > 5) {
-    difficulty = 2;
-  } else {
     difficulty = 1;
+  } else if (difficulty > 66) {
+    difficulty = 2;
+  } else if (difficulty > 42) {
+    difficulty = 3;
+  } else if (difficulty > 33 ) {
+    difficulty = 5;
+  } else if (difficulty > 5) {
+    difficulty = 7;
+  } else {
+    difficulty = 9;
   }
 
   var myNewGame = playing.game.restart(difficulty);
@@ -49,22 +49,37 @@ $("#other-game").on("click", function() {
 // THE CLUE
 
 $("#clue").on("click", function(){
+  /* Showing the clue image */
   $("#puzzle").toggleClass("invisible");
   $("#clue-img").toggleClass("invisible");
   $("#message-instructions-one").toggleClass("hidden");
+
+  /* loose one life */
+  playing.looseLife();
+  $('.lives-container img:last-child').remove();
+
+  /* hidding the clue image */
   setTimeout(function(){
     $("#puzzle").toggleClass("invisible");
     $("#clue-img").toggleClass("invisible");
   },1000)
   $("#message-instructions-one").toggleClass("hidden");
+
+  /* if the life you loose is the last one you had */
+  var endOfPlaying = playing.ultimateLost();
+  if (endOfPlaying === "looser") {
+    $(".message-container").toggleClass("final-message");
+    $(".creative-container").toggleClass("final-message");
+    $(".user-input-container").toggleClass("final-message-hide");
+    $(".final-message-container").toggleClass("final-message");
+  }
 })
 
 // THE LIVES
 
-for (i=0;i<playing.game.lives; i++) {
+for (i=0;i<playing.lives; i++) {
   $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
 }
-// DO SOMETHING WITH IT !!!
 
 // THE TIMER
 
@@ -74,7 +89,7 @@ setInterval(() => {
 
 // THE PUZZLE
 
-$( "#puzzle" ).on( "click", function(e) {
+$("#puzzle").on( "click", function(e) {
 
   playing.game.clicks +=1;
 
@@ -99,11 +114,26 @@ $( "#puzzle" ).on( "click", function(e) {
     setTimeout(function(){
       $("#games").html(playing.solvedPuzzles);
       $("#number-pieces").val("50");
+      playing.gainLife();
+      $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
     },1000)
   };
 
 });
 
+// NEW PLAYING
 
+$("#new-play").on("click", function(){
+  playing.restart();
+  $(".message-container").toggleClass("final-message");
+  $(".creative-container").toggleClass("final-message");
+  $(".user-input-container").toggleClass("final-message-hide");
+  $(".final-message-container").toggleClass("final-message");
 
+  for (i=0;i<playing.lives; i++) {
+    $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+  }
 
+  $("#games").html(playing.solvedPuzzles);
+
+});

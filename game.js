@@ -2,7 +2,6 @@ function Game () {
   this.puzzle = new Puzzle();
   let myPuzzle = this.puzzle;
   let myGame = this;
-  this.lives = 5;
   this.clicks = 0;
   this.clickedPieces = [];
   this.foundPieces = 0;

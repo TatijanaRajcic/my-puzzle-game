@@ -6,8 +6,12 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.invisible, .hidden, .temp{
+.invisible, .hidden, .temp, .final-message{
   display:none;
+}
+
+.final-message-hide {
+  visibility: hidden;
 }
 
 /* MAIN CONTAINER */
@@ -121,4 +125,14 @@ body {
 .lazy-img-container {
   display:flex;
   justify-content: center;
+}
+
+/* FINAL MESSAGE CONTAINER */
+
+.final-message-container {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:500px;
+  font-size: 3em;
 }
