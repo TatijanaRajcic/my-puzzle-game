@@ -1,5 +1,8 @@
 var playing = new Playing()
 
+$("#record-puzzles").html(3);
+$("#record-time").html(30);
+
 // CHOICE OF PUZZLE DIFFICULTY
 
 $("#number-pieces").on("click", function() {
@@ -21,18 +24,18 @@ $("#number-pieces").on("click", function() {
 
   var myNewGame = playing.game.restart(difficulty);
   if (myNewGame === "lazy") {
-    $("#lazy-img").toggleClass("temp");
+    $("#lazy-img").toggleClass("invisible");
     $("#puzzle").toggleClass("invisible");
-    $("#message-cheering").toggleClass("temp");
-    $("#message-instructions-one").toggleClass("temp");
-    $("#message-instructions-two").toggleClass("temp");
+    $("#message-cheering").toggleClass("invisible");
+    $("#message-instructions-one").toggleClass("not-shown");
+    $("#message-instructions-two").toggleClass("not-shown");
 
     setTimeout(function(){
-      $("#lazy-img").toggleClass("temp");
+      $("#lazy-img").toggleClass("invisible");
       $("#puzzle").toggleClass("invisible");
-      $("#message-cheering").toggleClass("temp");
-      $("#message-instructions-one").toggleClass("temp");
-      $("#message-instructions-two").toggleClass("temp");
+      $("#message-cheering").toggleClass("invisible");
+      $("#message-instructions-one").toggleClass("not-shown");
+      $("#message-instructions-two").toggleClass("not-shown");
       $("#number-pieces").val("50");
       playing.game.restart(3);
     },1500)
@@ -52,7 +55,8 @@ $("#clue").on("click", function(){
   /* Showing the clue image */
   $("#puzzle").toggleClass("invisible");
   $("#clue-img").toggleClass("invisible");
-  $("#message-instructions-one").toggleClass("hidden");
+  $("#message-instructions-one").toggleClass("not-shown");
+  $("#message-instructions-two").toggleClass("not-shown");
 
   /* loose one life */
   playing.looseLife();
@@ -62,16 +66,18 @@ $("#clue").on("click", function(){
   setTimeout(function(){
     $("#puzzle").toggleClass("invisible");
     $("#clue-img").toggleClass("invisible");
+    $("#message-instructions-one").toggleClass("not-shown");
+    $("#message-instructions-two").toggleClass("not-shown");
   },1000)
-  $("#message-instructions-one").toggleClass("hidden");
 
   /* if the life you loose is the last one you had */
   var endOfPlaying = playing.ultimateLost();
   if (endOfPlaying === "looser") {
-    $(".message-container").toggleClass("final-message");
-    $(".creative-container").toggleClass("final-message");
-    $(".user-input-container").toggleClass("final-message-hide");
-    $(".final-message-container").toggleClass("final-message");
+    $(".user-input-container").toggleClass("hide");
+    $(".message-container").toggleClass("invisible");
+    $(".creative-container").toggleClass("invisible");
+    $(".final-message-container").toggleClass("invisible");  
+    $(".final-message-container").toggleClass("flex");
   }
 })
 
@@ -100,13 +106,13 @@ $("#puzzle").on( "click", function(e) {
   clickY -= $(this).offset().top;
 
   if (playing.game.checkClickPuzzle(clickX,clickY) === true) {
-    $("#message-instructions-one").toggleClass("hidden");
-    $("#message-instructions-two").toggleClass("hidden");
+    $("#message-instructions-one").toggleClass("invisible");
+    $("#message-instructions-two").toggleClass("invisible");
   }
 
   if (playing.game.checkClickCanvas(clickX,clickY) === true){
-    $("#message-instructions-one").toggleClass("hidden");
-    $("#message-instructions-two").toggleClass("hidden");
+    $("#message-instructions-one").toggleClass("invisible");
+    $("#message-instructions-two").toggleClass("invisible");
   }
   
   if (playing.game.checkIfFinished() === true){
@@ -117,18 +123,37 @@ $("#puzzle").on( "click", function(e) {
       playing.gainLife();
       $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
     },1000)
+
+    // CHECK IF WINNER
+
+    var recordPuzzle = $("#record-puzzles").html();
+    var recordTime = $("#record-time").html();
+
+    if (playing.timer <= recordTime && playing.solvedPuzzles >= recordPuzzle) {
+      console.log("you're the best!")
+      $(".message-container").toggleClass("invisible");
+      $(".creative-container").toggleClass("invisible");
+      $(".user-input-container").toggleClass("hide");
+      $(".winner-message-container").toggleClass("flex");
+      $("#user-record").html(playing.solvedPuzzles);
+      $("#user-time").html(playing.timer);
+    }
+
   };
 
 });
 
 // NEW PLAYING
 
-$("#new-play").on("click", function(){
+$(".new-play").on("click", function(){
+
+  $(".message-container").toggleClass("invisible");
+  $(".creative-container").toggleClass("invisible");
+  $(".user-input-container").toggleClass("hide");
+  $(".final-message-container").toggleClass("flex");
+  $(".final-message-container").toggleClass("invisible");
+
   playing.restart();
-  $(".message-container").toggleClass("final-message");
-  $(".creative-container").toggleClass("final-message");
-  $(".user-input-container").toggleClass("final-message-hide");
-  $(".final-message-container").toggleClass("final-message");
 
   for (i=0;i<playing.lives; i++) {
     $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
@@ -137,3 +162,5 @@ $("#new-play").on("click", function(){
   $("#games").html(playing.solvedPuzzles);
 
 });
+
+

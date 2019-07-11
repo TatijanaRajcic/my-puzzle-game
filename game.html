@@ -29,7 +29,7 @@
           </div>
   
           <div class="record-container">
-            <p>current record: 42 puzzles in 360 secs</p>
+            <p>current record: <span id="record-puzzles"></span> puzzles in <span id="record-time"></span> secs</p>
           </div>
         </div>
 
@@ -51,8 +51,8 @@
 
     <div class="message-container">
       <p id="message-instructions-one">Choose your puzzle piece!</p>
-      <p id="message-instructions-two" class="hidden">Choose its place!</p>
-      <p id="message-cheering" class="temp">Come on, you can make it!</p>
+      <p id="message-instructions-two" class="invisible">Choose its place!</p>
+      <p id="message-cheering" class="invisible">Come on, you can make it!</p>
     </div> 
     
     <div class="creative-container">
@@ -65,13 +65,18 @@
       </div>
 
       <div class="lazy-img-container">
-        <img id="lazy-img" class="temp" src="lazy.jpeg" alt="">
+        <img id="lazy-img" class="invisible" src="lazy.jpeg" alt="">
       </div>
     </div>
 
-    <div class="final-message-container final-message">
+    <div class="final-message-container invisible">
       <p>the end.</p>
-      <button id="new-play">play again.</button>
+      <p><button class="new-play">play again.</button></p>
+    </div>
+
+    <div class="winner-message-container invisible">
+      <p>yaaay. you just broke the record with <span id="user-record"></span> puzzles in <span id="user-time"></span> seconds.</p>
+      <p><button class="new-play">play again.</button></p>
     </div>
 
   </div>

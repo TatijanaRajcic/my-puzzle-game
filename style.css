@@ -6,11 +6,15 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.invisible, .hidden, .temp, .final-message{
+.invisible {
   display:none;
 }
 
-.final-message-hide {
+.not-shown {
+  display:none;
+}
+
+.hide {
   visibility: hidden;
 }
 
@@ -99,10 +103,6 @@ body {
 
 /* CREATIVE-CONTAINER */
 
-.creative-container{
-  height:25%;
-}
-
 /* Canvas container within Creative container */
 .canvas-container {
   display:flex;
@@ -129,10 +129,15 @@ body {
 
 /* FINAL MESSAGE CONTAINER */
 
-.final-message-container {
+.flex {
   display:flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  text-align:center;
   height:500px;
   font-size: 3em;
+}
+
+.flex p {
+  width: 100%;
 }
