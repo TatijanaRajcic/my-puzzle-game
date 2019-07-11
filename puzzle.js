@@ -5,9 +5,9 @@ function Puzzle () {
   this.pieces = [];
   
   this.setUpImg = function(){
-    let randomNum = Math.floor(Math.random() * 6) + 1 ;
-    this.img.src = 'collage'+`${randomNum}`+'.jpg';
-    $("#clue-img").attr("src",'collage'+`${randomNum}`+'.jpg');
+    let randomNum = Math.floor(Math.random() * 10) + 1 ;
+    this.img.src = 'images/collage'+`${randomNum}`+'.jpg';
+    $("#clue-img").attr("src",'images/collage'+`${randomNum}`+'.jpg');
   }
 
   this.setUpCanvas = function(){

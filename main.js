@@ -84,7 +84,7 @@ $("#clue").on("click", function(){
 // THE LIVES
 
 for (i=0;i<playing.lives; i++) {
-  $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+  $("<img />").attr('src', "images/heart.png").appendTo($(".lives-container"))
 }
 
 // THE TIMER
@@ -121,7 +121,7 @@ $("#puzzle").on( "click", function(e) {
       $("#games").html(playing.solvedPuzzles);
       $("#number-pieces").val("50");
       playing.gainLife();
-      $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+      $("<img />").attr('src', "images/heart.png").appendTo($(".lives-container"))
     },1000)
 
     // CHECK IF WINNER
@@ -156,7 +156,7 @@ $("#new-play-looser").on("click", function(){
   playing.restart();
 
   for (i=0;i<playing.lives; i++) {
-    $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+    $("<img />").attr('src', "images/heart.png").appendTo($(".lives-container"))
   }
 
   $("#games").html(playing.solvedPuzzles);
@@ -174,7 +174,7 @@ $("#new-play-winner").on("click", function(){
   playing.restart();
 
   for (i=0;i<playing.lives; i++) {
-    $("<img />").attr('src', "heart.png").appendTo($(".lives-container"))
+    $("<img />").attr('src', "images/heart.png").appendTo($(".lives-container"))
   }
 
   $("#games").html(playing.solvedPuzzles);
