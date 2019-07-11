@@ -17,65 +17,68 @@
       <div class="title-container">
         <h1 id="page-title">puzzle game</h1>
       </div>
-    
-      <div class = "user-input-container">
-
-        <div class="state-game">
-          <div class="lives-container">
-          </div>
   
-          <div class="games-container">
-            <p>your time: <span id="counter"></span> / puzzles solved: <span id="games">0</span></p>
-          </div>
-  
-          <div class="record-container">
-            <p>current record: <span id="record-puzzles"></span> puzzles in <span id="record-time"></span> secs</p>
-          </div>
-        </div>
-
-        <div class="performance-container">
-          <div class="game-information-container">
-            <p>lazy today?</p>
-            <p><input type="range" id="number-pieces" min="1" max="100" value="50"></p>
-          </div>
-        
-          <div class="clue-container">
-            <p><span id="clue">want a clue?</span> / <span id="other-game">another puzzle?</span></p>
-          </div>
-        </div>
-        
-      </div>
     </div>
+
+    <div>
+      <div class="message-container">
+        <p id="message-instructions-one">Choose your puzzle piece!</p>
+        <p id="message-instructions-two" class="invisible">Choose its place!</p>
+        <p id="message-cheering" class="invisible">Come on, you can make it!</p>
+      </div> 
       
-    <div class="message-container">
-      <p id="message-instructions-one">Choose your puzzle piece!</p>
-      <p id="message-instructions-two" class="invisible">Choose its place!</p>
-      <p id="message-cheering" class="invisible">Come on, you can make it!</p>
-    </div> 
-    
-    <div class="creative-container">
-      <div class="canvas-container">
-        <canvas id="puzzle"></canvas>
+      <div class="creative-container">
+        <div class="canvas-container">
+          <canvas id="puzzle"></canvas>
+        </div>
+      
+        <div class="clue-img-container">
+          <img id="clue-img" class="invisible" src="" alt="">
+        </div>
+  
+        <div class="lazy-img-container">
+          <img id="lazy-img" class="invisible" src="images/lazy.jpeg" alt="">
+        </div>
       </div>
-    
-      <div class="clue-img-container">
-        <img id="clue-img" class="invisible" src="" alt="">
+  
+      <div class="final-message-container invisible">
+        <p>the end.</p>
+        <p><button id="new-play-looser">play again.</button></p>
       </div>
-
-      <div class="lazy-img-container">
-        <img id="lazy-img" class="invisible" src="images/lazy.jpeg" alt="">
+  
+      <div class="winner-message-container invisible">
+        <p>yaaay. you just broke the record with <span id="user-record"></span> puzzles in <span id="user-time"></span> seconds.</p>
+        <p><button id="new-play-winner">play again.</button></p>
+        <img id="winner-img" class="invisible" src="images/winner.png" alt="">
       </div>
     </div>
+  
+    <div class = "user-input-container">
 
-    <div class="final-message-container invisible">
-      <p>the end.</p>
-      <p><button id="new-play-looser">play again.</button></p>
-    </div>
+      <div class="state-game">
+        <div class="lives-container">
+        </div>
 
-    <div class="winner-message-container invisible">
-      <p>yaaay. you just broke the record with <span id="user-record"></span> puzzles in <span id="user-time"></span> seconds.</p>
-      <p><button id="new-play-winner">play again.</button></p>
-      <img id="winner-img" class="invisible" src="images/winner.png" alt="">
+        <div class="games-container">
+          <p id="user-score">your time: <span id="counter"></span> / puzzles solved: <span id="games">0</span></p>
+        </div>
+
+        <div class="record-container">
+          <p>current record: <span id="record-puzzles"></span> puzzles in <span id="record-time"></span> secs</p>
+        </div>
+      </div>
+
+      <div class="performance-container">
+        <div class="game-information-container">
+          <p>lazy today?</p>
+          <p><input type="range" id="number-pieces" min="1" max="100" value="50"></p>
+        </div>
+      
+        <div class="clue-container">
+          <p><span id="clue">want a clue?</span> / <span id="other-game">another puzzle?</span></p>
+        </div>
+      </div>
+      
     </div>
 
   </div>

@@ -2,7 +2,7 @@ function Playing() {
   this.game = new Game();
   this.solvedPuzzles = 0;
   this.timer = 0;
-  this.lives = 7;
+  this.lives = 8;
 
 
   this.setTimer = function(){
@@ -31,7 +31,7 @@ function Playing() {
     this.game = new Game();
     this.solvedPuzzles = 0;
     this.timer = 0;
-    this.lives = 7;
+    this.lives = 8;
   }
 }
 
