@@ -20,8 +20,27 @@ function Game () {
   this.restart = function(difficulty) {
     this.puzzle.ctx.clearRect(0,0,this.puzzle.canvas.width,this.puzzle.canvas.height);
     this.start(difficulty,difficulty);
+    this.checkForDifficulty(difficulty);
+  }
+
+  this.checkForDifficulty = function(difficulty) {
+
     if (difficulty === 1) {
-      return "lazy";
+      $("#lazy-img").toggleClass("invisible");
+      $("#puzzle").toggleClass("invisible");
+      $("#message-cheering").toggleClass("invisible");
+      $("#message-instructions-one").toggleClass("not-shown");
+      $("#message-instructions-two").toggleClass("not-shown");
+  
+      setTimeout(function(){
+        $("#lazy-img").toggleClass("invisible");
+        $("#puzzle").toggleClass("invisible");
+        $("#message-cheering").toggleClass("invisible");
+        $("#message-instructions-one").toggleClass("not-shown");
+        $("#message-instructions-two").toggleClass("not-shown");
+        $("#number-pieces").val("50");
+        myGame.restart(3);
+      },1500)
     }
   }
 
