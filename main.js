@@ -90,66 +90,22 @@ $("#clue").on("click", function(){
 
 // THE TIMER
 
-setInterval(() => {
-  $("#counter").html(playing.timer);
-  if(playing.timer > recordTime){
-    showHideContent();
-    restartAndDraw();
-    $("#games").html(playing.solvedPuzzles);
-  }
-});
-
 // THE PUZZLE
 
-$("#puzzle").on( "click", function(e) {
 
-  playing.game.clicks +=1;
-
-  // get the position where we clicked
-  var clickX = e.pageX;
-  var clickY = e.pageY;
-  clickX -= $(this).offset().left;
-  clickY -= $(this).offset().top;
-
-  if (playing.game.checkClickPuzzle(clickX,clickY) === true) {
-    $("#message-instructions-one").toggleClass("invisible");
-    $("#message-instructions-two").toggleClass("invisible");
-  }
-
-  if (playing.game.checkClickCanvas(clickX,clickY) === true){
-    $("#message-instructions-one").toggleClass("invisible");
-    $("#message-instructions-two").toggleClass("invisible");
-  }
-  
-  if (playing.game.checkIfFinished() === true){
-    playing.solvedPuzzles +=1;
-    setTimeout(function(){
-      $("#games").html(playing.solvedPuzzles);
-      $("#number-pieces").val("50");
-      playing.gainLife();
-      drawLives();
-    },1000)
-
-    // CHECK IF WINNER
-    if (playing.timer <= recordTime && playing.solvedPuzzles >= recordPuzzle) {
-      showHideContentWinner();
-      $("#user-record").html(playing.solvedPuzzles);
-      $("#user-time").html(playing.timer);
-    }
-  };
-
-});
 
 // NEW PLAYING
 
 $("#new-play-looser").on("click", function(){
   showHideContent();
   restartAndDraw();
+  playing.countDownRef = setInterval(playing.countingUp,1000);
   $("#games").html(playing.solvedPuzzles);
 });
 
 $("#new-play-winner").on("click", function(){
   showHideContentWinner()
   restartAndDraw();
+  playing.countDownRef = setInterval(playing.countingUp,1000);
   $("#games").html(playing.solvedPuzzles);
 });
