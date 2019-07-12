@@ -19,6 +19,13 @@ body {
   visibility: hidden;
 }
 
+button {
+  margin: 5% 0%;
+  width:100%;
+  padding:5%;
+  font-weight:bold;
+}
+
 /* MAIN CONTAINER */
 
 .main-container{
@@ -129,6 +136,7 @@ body {
   text-align: center;
   font-size: 1.3em;
 }
+
 
 /* CREATIVE-CONTAINER */
 
