@@ -1,6 +1,6 @@
 var playing = new Playing()
 
-$("#record-puzzles").html(3);
+$("#record-puzzles").html(2);
 $("#record-time").html(30);
 var recordPuzzle = $("#record-puzzles").html();
 var recordTime = $("#record-time").html();
@@ -10,8 +10,6 @@ var recordTime = $("#record-time").html();
 function showHideClue() {
   $("#puzzle").toggleClass("invisible");
   $("#clue-img").toggleClass("invisible");
-/*   $("#message-instructions-one").toggleClass("not-shown");
-  $("#message-instructions-two").toggleClass("not-shown"); */
 }
 
 function showHideContent() {
