@@ -10,8 +10,8 @@ var recordTime = $("#record-time").html();
 function showHideClue() {
   $("#puzzle").toggleClass("invisible");
   $("#clue-img").toggleClass("invisible");
-  $("#message-instructions-one").toggleClass("not-shown");
-  $("#message-instructions-two").toggleClass("not-shown");
+/*   $("#message-instructions-one").toggleClass("not-shown");
+  $("#message-instructions-two").toggleClass("not-shown"); */
 }
 
 function showHideContent() {
@@ -87,12 +87,6 @@ $("#clue").on("click", function(){
     showHideContent();
   }
 })
-
-// THE TIMER
-
-// THE PUZZLE
-
-
 
 // NEW PLAYING
 

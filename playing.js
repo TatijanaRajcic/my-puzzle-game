@@ -6,7 +6,6 @@ function Playing() {
   var playing = this;
   this.countDownRef;
 
-
   this.looseLife = function() {
     this.lives -=1;
   }
@@ -14,7 +13,6 @@ function Playing() {
   this.gainLife = function(){
     this.lives +=1;
   }
-
 
   this.ultimateLost = function() {
     if (this.lives <= 0) {
