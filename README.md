@@ -1,4 +1,4 @@
-# project-week3
+# first Ironhack's project: http://mypuzzlegameironhack.herokuapp.com/
 
 TO DO : 
 
