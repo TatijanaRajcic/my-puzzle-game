@@ -6,6 +6,11 @@ function Puzzle () {
   
   this.setUpImg = function(){
     let randomNum = Math.floor(Math.random() * 10) + 1 ;
+
+    if (document.documentElement.clientWidth<500) {
+      this.img.width = document.documentElement.clientWidth/2;
+      // this.img.style.height = "auto"
+    }
     this.img.src = 'images/collage'+`${randomNum}`+'b.jpg';
     $("#clue-img").attr("src",'images/collage'+`${randomNum}`+'b.jpg');
   }
@@ -81,7 +86,12 @@ function Puzzle () {
 
       this.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
       this.ctx.fillRect(op.x, op.y, op.width, op.height)
-      this.ctx.drawImage(this.img, op.x, op.y, op.width, op.height, cp.x, cp.y, op.width, op.height)
+
+      let ratioX = this.img.naturalWidth / this.img.width;
+      let ratioY = this.img.naturalHeight / this.img.height;
+      
+      this.ctx.drawImage(this.img, op.x*ratioX, op.y*ratioY, op.width*ratioX, op.height*ratioY, cp.x, cp.y, op.width, op.height)
+      // pbm ici car op.width et op.height vont récupérer par ex 33px*33px (si l'on a indiqué comme dimensions 100*100) sur la grande image qui elle fait plus que 100*100
     }
 
   };

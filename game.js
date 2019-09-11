@@ -73,7 +73,11 @@ function Game () {
         this.puzzle.ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
         this.puzzle.ctx.fillRect(currentPiece.currentPosition.x, currentPiece.currentPosition.y, currentPiece.sprite.width, currentPiece.sprite.height)
         
-        this.puzzle.ctx.drawImage(this.puzzle.img, currentPiece.sprite.x, currentPiece.sprite.y, currentPiece.sprite.width, currentPiece.sprite.height,currentPiece.sprite.x, currentPiece.sprite.y, currentPiece.sprite.width, currentPiece.sprite.height)
+        let ratioX = this.puzzle.img.naturalWidth / this.puzzle.img.width;
+        let ratioY = this.puzzle.img.naturalHeight / this.puzzle.img.height;
+
+        this.puzzle.ctx.drawImage(this.puzzle.img, currentPiece.sprite.x*ratioX, currentPiece.sprite.y*ratioY, currentPiece.sprite.width*ratioX, currentPiece.sprite.height*ratioY,currentPiece.sprite.x, currentPiece.sprite.y, currentPiece.sprite.width, currentPiece.sprite.height)
+        
         this.foundPieces +=1;
   
         return true
