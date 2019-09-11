@@ -11,7 +11,7 @@ function Game () {
     this.clicks = 0;
     this.clickedPieces = [];
     this.foundPieces = 0;
-      this.puzzle.img.addEventListener("load", function(){
+    this.puzzle.img.addEventListener("load", function(){
       myPuzzle.setUpCanvas();
       myPuzzle.drawPuzzle(myPuzzle.createPuzzle(columns,rows),columns,rows); 
     });
