@@ -85,6 +85,16 @@ button {
   width: 50%;
 }
 
+@media (max-width:500px) {
+
+  .user-input-container {
+    flex-wrap: wrap
+  }
+  .user-input-container > div {
+    width: 100%;
+  }
+}
+
 .state-game {
   width:100%;
   display:flex;
